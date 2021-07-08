@@ -3,13 +3,13 @@ require 'byebug'
 module Piggybak
   class CartController < ApplicationController
     def show
-      byebug
       @cart = Cart.new(cookies["cart"])
       @cart.update_quantities
       cookies["cart"] = { :value => @cart.to_cookie, :path => '/' }
     end
 
     def add
+      byebug
       cookies["cart"] = { :value => Cart.add(cookies["cart"], params), :path => '/' }
       redirect_to piggybak.cart_url
     end
